@@ -1,0 +1,129 @@
+<html>
+<head>
+	<title><%= title %> </title>
+	<meta charset="UTF-8">
+		
+	<style>
+		*{border-radius: 0px !important}
+	</style>
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+-->
+	
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- //for bootstrap working -->
+
+
+</head>
+
+<body>
+<div class="header" id="home">
+	<div class="banner_header_top_agile_w3ls">
+			<div class="header-top-wthree-agileits">
+				<nav class="navbar navbar-default">
+					<div class="navbar-header navbar-left">
+						
+						<h1><a class="navbar-brand" href="/event"> Football</a></h1>
+					</div>
+									<div class="header_left">
+
+					<% if(!(isAuthenticated)) { %>
+						<ul>
+							<li><a class="shop" href="./login">Login</a></li>				
+						</ul> <%} %>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+						<div class="top_nav_left">
+							<nav class="cl-effect-15" id="cl-effect-15">
+								<ul>
+									<li class="active"><a href="/" data-hover="Home">Home</a></li>
+									<li><a href="about.html" data-hover="Player">Player</a></li>
+									<li><a href="blog.html" data-hover="Team">Team</a></li>
+									
+									<% if(!(isAuthenticated)) { %>
+									<li><a href="/register" data-hover="Register">Register</a></li>
+									<%} %>
+									<% if(isAuthenticated) { %>
+									<li><a href="/profile" data-hover="Profile">Profile</a></li>
+									<% } %>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					
+					<!-- search -->
+					<div class="search">
+						<div class="cd-main-header">
+							<ul class="cd-header-buttons">
+								<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+							</ul>
+						</div>
+						<div id="cd-search" class="cd-search">
+							<form action="#" method="post">
+								<input name="Search" type="search" placeholder="Click enter after typing...">
+							</form>
+						</div>
+					</div>
+					<!-- //search -->
+
+					<div class="clearfix"></div>
+				</nav>
+			</div>
+		</div>
+</div>
+
+<div class="container" style="width: 50%">
+
+<br>
+<h1><%= title %></h1>
+
+<br>
+
+<% if(errors) {%>
+<% errors.forEach(function(errors){ %>
+	<div class="alert alert-danger">
+   		 <p><%= errors.msg %></p>
+	</div>
+<% }); %>
+<% } %>
+
+<br>
+
+
+	<form method="POST" action="/register" encType="multipart/form-data">
+		<div class="form-group">
+	    	<label for="username">Username</label>
+	    	<input type="text" class="form-control" name="username"  placeholder="Enter Username">
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="email">Email</label>
+	    	<input type="email" class="form-control" name="email" placeholder="Enter Email">
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="password">Password</label>
+	    	<input type="password" class="form-control" name="password" placeholder="Password">
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="password">Re-Enter Password</label>
+	    	<input type="password" class="form-control" name="confirmpassword" placeholder="Password">
+	  	</div>
+	  	<div class="form-group">
+            <label for="mob_no" class="col-md-3 control-label">Profile Image</label>
+               <div class="col-sm-9">
+                    <input class="form-control" type="file" name="sampleFile" />
+                </div>
+         </div>
+	  	<br>
+	  	<button type="submit" class="btn btn-primary">Submit</button>
+	  	
+	</form>
+
+</div>
+
+
+
+</body>
+</html>

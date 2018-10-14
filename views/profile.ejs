@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile page</title>
+	
+<style>
+ .button {
+    background-color: #f44336; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
+
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/font-awesome.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+
+<div class="header" id="home">
+    <div class="banner_header_top_agile_w3ls">
+            <div class="header-top-wthree-agileits">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header navbar-left">
+                        
+                        <h1><a class="navbar-brand" href="/event"> Football</a></h1>
+                    </div>
+                                    <div class="header_left">
+
+                    <% if((isAuthenticated)) { %>
+                        <ul>
+                            <li><a class="shop" href="./logout">Logout</a></li>               
+                        </ul> <%} %>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+                        <div class="top_nav_left">
+                            <nav class="cl-effect-15" id="cl-effect-15">
+                                <ul>
+                                    <li class="active"><a href="/" data-hover="Home">Home</a></li>
+                                    <li><a href="about.html" data-hover="Player">Player</a></li>
+                                    <li><a href="blog.html" data-hover="Team">Team</a></li>
+                                    
+                                    <% if(!(isAuthenticated)) { %>
+                                    <li><a href="/register" data-hover="Register">Register</a></li>
+                                    <%} %>
+                                    <% if(isAuthenticated) { %>
+                                    <li><a href="/profile" data-hover="Profile">Profile</a></li>
+                                    <% } %>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- search -->
+                    <div class="search">
+                        <div class="cd-main-header">
+                            <ul class="cd-header-buttons">
+                                <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                            </ul>
+                        </div>
+                        <div id="cd-search" class="cd-search">
+                            <form action="#" method="post">
+                                <input name="Search" type="search" placeholder="Click enter after typing...">
+                            </form>
+                        </div>
+                    </div>
+                    <!-- //search -->
+
+                    <div class="clearfix"></div>
+                </nav>
+            </div>
+        </div>
+</div>
+
+
+<!-- <a class="shop" href="/logout">Logout</a> -->
+<br>
+<br>
+
+<div class="container bootstrap snippet" >
+
+    <div class="row">
+
+    <form class="form" action="/profile" method="post" id="registrationForm" enctype="multipart/form-data">
+
+        <div class="col-sm-3"><!--left col-->
+
+
+            <div class="text-center">
+                <img src="images/upload_images/praveennaik.jpg" style="height: 200px;width: 200px;border-radius: 50%" alt="avatar">
+                  <br><br>
+                <h6>Upload a different photo...</h6>
+                   <br><br>
+
+                   <div class="form-group">
+                              <input type="file" name="upload image" id="image"  title="enter image" value="">                         
+                    </div>
+
+
+            </div></hr><br>
+        </div><!--/col-3-->
+
+
+        <div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="/profile">Profile</a></li>
+                <li><a data-toggle="tab" href="/pwd"> Change Password</a></li>
+            </ul>
+
+
+            <div class="tab-content" >
+                <div class="tab-pane active" id="home">
+                <hr>
+
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <br><label for="first_name"><h4>First name</h4></label>
+                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First name" title="enter your first name if any." value="">
+                          </div>
+                      </div>
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                            <br><label for="last_name"><h4>Last name</h4></label>
+                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last name" title="enter your last name if any." value="">
+                          </div>
+                      </div>
+
+
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                             <br><label for="mobile"><h4>Country</h4></label>
+                              <input type="text" class="form-control" name="country" id="country" placeholder="Country" title="enter your mobile number" value="">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-xs-6">
+                              <br><label for="email"><h4>Email</h4></label>
+                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email." value="">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-xs-6">
+                              <br><label for="age"><h4>Age</h4></label>
+                              <input type="number" class="form-control" name="age" id="age" placeholder="Age" title="enter your email." value="">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit" style="background-color: #0f2453; "><i class="glyphicon glyphicon-ok-sign"></i>Save</button>                            
+                            </div>
+                      </div>
+
+
+              <hr>
+
+             </div><!--/tab-pane-->
+
+            </form>
+
+        </div><!--/tab-pane-->
+    </div><!--/tab-content-->
+    <!--/row-->
+
+   
+
+</body>
+</html>
