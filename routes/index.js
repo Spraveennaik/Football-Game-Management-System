@@ -6,6 +6,8 @@ var passport = require('passport');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var	fileUpload = require('express-fileupload');
+var passport = require('passport');
+var localStrategy = require('passport-local').Strategy;
 /*var busboy = require('connect-busboy');
 var fs = require('fs');
 */
@@ -23,8 +25,8 @@ const con = mysql.createConnection({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	console.log(req.user);
-	console.log(req.isAuthenticated());
+	//console.log(req.user);
+	//console.log(req.isAuthenticated());
   res.render('index', { title: 'Express' });
 });
 
@@ -46,7 +48,6 @@ router.post('/register', function(req, res, next) {
 	req.checkBody('email','email you entered in invalid').isEmail();
 	req.checkBody('password','password must be 8-10 characters long').len(8,100)
 	req.checkBody('confirmpassword','password do not match').equals(req.body.password);
-
 
 	const errors = req.validationErrors();
 
@@ -76,10 +77,10 @@ router.post('/register', function(req, res, next) {
 	file.mv('public/images/upload_images/'+file.name, function(err) {
                              
 	     if (err)
- 			return res.status(500).send(err);
+ 			return res.status(500).send(err);});
 
 		bcrypt.hash(password,saltRounds,function(err,hash){
-		con.query('INSERT INTO users(username,email,password,image)VALUES(?,?,?,?)', [username, email, password,image_name], 
+		con.query('INSERT INTO manager(username,email,image,password)VALUES(?,?,?,?)', [username, email,image_name, password], 
 		function(error,results,fields){
 			if(error) throw error;
 
@@ -89,23 +90,71 @@ router.post('/register', function(req, res, next) {
 				const user_id = results[0];
 				console.log(results[0]);
 
+
 				req.login(user_id,function(err){
 					res.render('index', { 
 					title: 'Home'
 			     });
-				});
-					
+				});					
 			});
 		});
 	 });
-	});
    }
 });	
  
 
 
 router.get('/profile',authenticationMiddleware(), function(req, res, next) {
-  res.render('profile', { title: 'profile' });
+	if(req.user.user_id)
+	{
+
+		con.query('SELECT * FROM manager WHERE Mid = (?)',[req.user.user_id],function(err,results,fields){
+			res.render('profile',{
+				title : "profile",
+				items : results
+			});
+	  	});
+  	}else{
+  		res.render('login', { title: 'Login' });
+  	}
+});
+
+
+router.post('/profile', function(req, res, next) {
+  
+  if(req.user.user_id)
+  	{	
+		const firstname = req.body.first_name;
+		const lastname = req.body.last_name;
+		const country = req.body.country;
+		const email = req.body.email;
+		const age = req.body.age;
+
+
+		if (req.files.sampleFile == undefined)
+    		return res.status(400).send('No files were uploaded.');
+    	//console.log(req.files.sampleFile.name);
+    	console.log(req.files.sampleFile);
+
+  
+	/*	var file = req.files.sampleFile;
+  		var image_name = file.name;
+
+  		file.mv('public/images/upload_images/'+file.name, function(err) {
+                             
+	    if (err)
+		return res.status(500).send(err);});
+*/
+  		con.query('UPDATE manager SET firstname = ?, lastname = ?, Age = ?, country = ? ,email = ? WHERE Mid = ?',[firstname,lastname,age,country,email,req.user.user_id],function(err,results){
+  			if(err)
+  			{
+  				res.redirect('/login');
+  			}
+  			res.redirect('/profile');
+
+  		});
+    }
+    
 });
 
 router.get('/pwd',authenticationMiddleware(), function(req, res, next) {
@@ -117,30 +166,77 @@ router.get('/pwd',authenticationMiddleware(), function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Login' });
 });
-
-router.get('/upload', function(req, res, next) {
-  res.render('upload', { title: 'Upload' });
-});
-
-
-router.post('/upload', function(req, res, next) {
-	if (!req.files)
-    return res.status(400).send('No files were uploaded.');
  
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  var file = req.files.sampleFile;
-  console.log(file);
-  // Use the mv() method to place the file somewhere on your server
+ router.get('/extra/12', function(req, res, next) {
+  	con.query("select * from team order by TeamID ASC", function(err,result){
+		res.render('extra',{
+		title : "extra",
+		items : result
+	});
+  });
+});
 
-	file.mv('public/images/upload_images/'+file.name, function(err) {
-                             
-	     if (err)
- 			return res.status(500).send(err);
+router.get('/teams', function(req, res, next) {
+
+	con.query("select * from team order by TeamID ASC", function(err,result){
+		res.render('teams',{
+		title : "Teams",
+		items : result
+	});
+  });
 });
 
 
-  res.render('upload', { title: 'Upload' });
+router.get('/team/:id',function(req,res,next){
+
+	con.query("SELECT * FROM team WHERE TeamID = '"+req.params.id+"'",function(err,result){
+		var team = result[0].TName;
+
+	con.query("SELECT * FROM player WHERE TeamID = '"+req.params.id+"'",function(err,result){
+
+
+		res.render('team',{
+			title : "Team",
+			items : result,
+			teamname : team
+		});
+	  });
+	});
 });
+
+
+router.get('/player/:id',function(req,res,next){
+
+	con.query("SELECT * FROM player WHERE Player_ID = '"+req.params.id+"'",function(err,result){
+		var results2 = result;
+
+	con.query("SELECT * FROM stats WHERE Player_ID = '"+req.params.id+"'",function(err,result){
+		var results1 = result;		
+
+		con.query("SELECT * FROM team WHERE TeamID = '"+results2[0].TeamID+"'",function(err,result){
+		var team = result[0].TName;
+
+		res.render('player',{
+			title : "Player",
+			items : results2,
+			stat : results1,
+			teamname : team
+		});
+	  });
+	});
+});
+});
+
+
+router.get('/player', function(req, res, next) {
+  con.query("select * from player order by player_ID ASC", function(err,result){
+		res.render('players',{
+		title : "Players",
+		items : result
+	});
+  });
+});
+
 
 router.post('/login',passport.authenticate('local',{
 	successRedirect : '/profile',
@@ -152,6 +248,37 @@ router.get('/logout', function(req, res, next) {
 	req.session.destroy();
  	res.redirect('/');
 });
+
+
+passport.use(new localStrategy(
+	function(username,password,done){
+	//	console.log(username);
+	//	console.log(password);
+
+		con.query('SELECT Mid,password FROM manager WHERE username = ?',[username],function(err,results,fields){
+			if(err) {done(err)};
+
+			if(results.length === 0){
+				done(null,false);
+			}else{
+
+			const hash = results[0].password.toString();
+			//console.log(hash);
+
+			var n = hash.localeCompare(password);
+
+			if(n==0){
+				return done(null, {user_id : results[0].Mid});
+			}else{
+				return done(null,false);
+			}
+		}
+
+		}) 
+	}
+));
+
+
 
 router.get('/event',function(req,res,next){
 

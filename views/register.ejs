@@ -26,7 +26,8 @@
 						
 						<h1><a class="navbar-brand" href="/event"> Football</a></h1>
 					</div>
-									<div class="header_left">
+					
+					<div class="header_left">
 
 					<% if(!(isAuthenticated)) { %>
 						<ul>
@@ -40,8 +41,8 @@
 							<nav class="cl-effect-15" id="cl-effect-15">
 								<ul>
 									<li class="active"><a href="/" data-hover="Home">Home</a></li>
-									<li><a href="about.html" data-hover="Player">Player</a></li>
-									<li><a href="blog.html" data-hover="Team">Team</a></li>
+									<li><a href="/player" data-hover="Player">Player</a></li>
+									<li><a href="/teams" data-hover="Team">Team</a></li>
 									
 									<% if(!(isAuthenticated)) { %>
 									<li><a href="/register" data-hover="Register">Register</a></li>

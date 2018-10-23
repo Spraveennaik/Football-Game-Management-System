@@ -41,7 +41,7 @@ app.use('/pcss',express.static(path.join(__dirname + '/node_modules/bootstrap/di
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
@@ -69,7 +69,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : false}));
+app.use(bodyParser.urlencoded({extended : true}));
 app.use(expressValidator());
 
 app.use(function(req,res,next){
@@ -80,12 +80,15 @@ app.use(function(req,res,next){
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
+/*
+
 passport.use(new localStrategy(
 	function(username,password,done){
 	//	console.log(username);
 	//	console.log(password);
 
-		con.query('SELECT id,password FROM users WHERE username = ?',[username],function(err,results,fields){
+		con.query('SELECT Mid,password FROM manager WHERE username = ?',[username],function(err,results,fields){
 			if(err) {done(err)};
 
 			if(results.length === 0){
@@ -98,24 +101,17 @@ passport.use(new localStrategy(
 			var n = hash.localeCompare(password);
 
 			if(n==0){
-				return done(null, {user_id : results[0].id});
+				return done(null, {user_id : results[0].Mid});
 			}else{
 				return done(null,false);
 			}
 		}
-/*
-			bcrypt.compare(password,hash,function(err,response){
-				if(response === true){
-					return done(null,'hello');
-				}else{
-					return done(null,false);
-				}
-			}); */
+
 		}) 
 	}
 ));
 
-
+*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

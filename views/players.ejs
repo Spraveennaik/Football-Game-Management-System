@@ -1,24 +1,29 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<title><%= title %> </title>
 	<meta charset="UTF-8">
-		<title>simple app</title>
-
+		
 	<style>
 		*{border-radius: 0px !important}
 	</style>
-<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
 -->
+	
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- //for bootstrap working -->
+
+		<link rel="stylesheet1" href="/pcss/bootstrap.min.css"/>
+		<script src="/pjs/jquery.min.js"></script>
+		<script src="/pjs/tether.min.js"></script>
+		<script src="/pjs/bootstrap.min.js"></script>
+
 
 </head>
 
 <body>
-
-	<div class="header" id="home">
+<div class="header" id="home">
 	<div class="banner_header_top_agile_w3ls">
 			<div class="header-top-wthree-agileits">
 				<nav class="navbar navbar-default">
@@ -75,27 +80,44 @@
 		</div>
 </div>
 
-
-<div class="container" style="width: 50%">
-
-<br>
-<h1>Login</h1>
 <br>
 <br>
-<form method="POST" action="/login">
-	<div class="form-group">
-    	<label for="username">Username</label>
-    	<input type="text" class="form-control" name="username"  placeholder="Enter Username">
-  	</div>
-  	<div class="form-group">
-    	<label for="password">Password</label>
-    	<input type="password" class="form-control" name="password" placeholder="Password">
-  	</div>
 
-	<button type="submit" class="btn btn-primary">Login</button>
-	<br>
-</form>
-
+<div class="=" style="margin-right: 100px;margin-left: 100px">
+	<div class="col s12">
+		<% if(items.length > 0) { %>
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width:10%;text-align:center;">Player ID</th>
+						<th style="width:30%;text-align:center;">Name</th>
+						<th style="width: 15%;text-align: center;">Position</th>
+						<th style="width: 15%;text-align: center;">Rating</th>
+						<th style="width: 15%;text-align: center;">Country</th>
+						<th style="width: 25%;text-align: center;">     </th>
+					</tr>
+				</thead>
+				<tbody>
+					<% items.forEach(function(item,index){ %>
+						<tr>
+							<td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
+							<td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
+							<td style="width: 15%;text-align: center;"><%= item.Position %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Rating %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Country %></td>
+							<td style="width: 25%;text-align: center;">
+								<a href="/player/<%= item.Player_ID %>" class="btn btn-success" style="background-color: blue">Profile</a>
+							</td>	
+						</tr>
+					<% }); %>
+				</tbody>
+			</table>
+		<% }else{ %>
+			<p><strong>There are no records available</strong></p>
+		<% } %>
+	</div>
 </div>
+
+
 </body>
 </html>
