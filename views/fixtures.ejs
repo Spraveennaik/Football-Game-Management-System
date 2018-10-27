@@ -95,10 +95,7 @@
 <br>
 <br>
 <div class="container">
-    <h1 style="text-align: center;">Match 1</h1>
-    <table class="table">
-
-  </table>
+    <h1 style="text-align: center;">Simulate Matches</h1>
 </div>
 
 <div>
@@ -111,54 +108,41 @@
     </thead>
     <tbody>
       <tr>
-        <th><%= m=Math.floor(((Math.random()*10))%5) %></th>
-        <th><%= n=Math.floor(((Math.random()*10))%5) %></th>
+        <th><%= m=goal1 %></th>
+        <th><%= n=goal2 %></th>
       </tr>
     </tbody>
     <tbody>
+    <% var i %>
+    <% var max;
+        if(goal1>goal2)
+        max=goal1;
+        else
+        max=goal2; %>
+    <% for(i=0;i < max;++i){ %>
         <tr>
-            <% name=" " %>
-            <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
-            <td><%= name %></td>
-            <% name=" " %>
-            <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
-            <td><%= name %></td>
+            <% if(i< goal1) { %>
+            <td><%= striker1[goalscorers1[i]].firstname %> <%= striker1[goalscorers1[i]].lastname %></td>
+            <% } else { %>
+            <td>&nbsp;</td>
+            <% } %>
+            <% if(i< goal2) { %>
+            <td><%= striker2[goalscorers2[i]].firstname %> <%= striker2[goalscorers2[i]].lastname %></td>
+            <% } else { %>
+                <td>&nbsp;</td>
+                <% } %>
         </tr>
+        
+    <% } %>
     </tbody>
-    <tbody>
-            <tr>
-                <% name=" " %>
-                <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
-                <td><%= name %></td>
-                <% name=" " %>
-                <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
-                <td><%= name %></td>
-            </tr>
-        </tbody>
-        <tbody>
-                <tr>
-                    <% name=" " %>
-                    <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
-                    <td><%= name %></td>
-                    <% name=" " %>
-                    <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
-                    <td><%= name %></td>
-                </tr>
-        </tbody>
-
-        <tbody>
-                <tr>
-                    <% name=" " %>
-                    <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
-                    <td><%= name %></td>
-                    <% name=" " %>
-                    <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
-                    <td><%= name %></td>
-                </tr>
-        </tbody>
     
 	</table>
 </div>
+<br>
+<br>
+<% if(isAuthenticated) { %>
+    <center><a href="/fixtures" data-hover="Fixtures" class="btn btn-success" style="background-color: blue">Role the dice again!!</a></center>
+    <% } %>
 </body>
 
 </html>
