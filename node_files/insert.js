@@ -2,8 +2,8 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
+  user: "username",
+  password: "password",
   database: "mydb"
 });
 
@@ -11,7 +11,7 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");});
 
-  var sql = "INSERT INTO player (firstname, lastname,Age,Country,Rating,Position,Height,Price) VALUES ?";
+  var sql = "INSERT INTO Player (firstname, lastname,Age,Country,Rating,Position,Height,Price) VALUES ?";
   var values = [
  ['Kamron', 'Hermann', 30, 'Sweden', 56, '', 180, 579],
  ['Frederic', 'Morar', 17, 'Anguilla', 40, '', 162, 267],
@@ -121,7 +121,7 @@ con.connect(function(err) {
     console.log("Number of records inserted: " + result.affectedRows);
   });
 
- 
+
  var sql = "INSERT INTO `stats` (`Appearances`, `Goals`, `Key_passes`, `Assists`, `saves`, `Clearances`, `Clean_sheets`, `Player_ID`) VALUES ?";
   var values = [
 
@@ -338,11 +338,10 @@ var sql = "INSERT INTO `skill` (`Reflexes`, `Dribbling`, `Crossing`, `Ball_contr
  [31, 32, 31, 62, 37, 76, 88, 84, 55, 75, 45, 64, 49, 49, 48, 67, 64, 98],
  [78, 37, 40, 53, 84, 30, 54, 48, 90, 33, 77, 68, 30, 71, 78, 90, 31, 99],
  [37, 39, 84, 42, 45, 83, 83, 38, 61, 83, 45, 39, 32, 51, 88, 40, 33, 100],
- 
+
  ];
 
   con.query(sql, [values], function (err, result) {
     if (err) throw err;
     console.log("Number of records inserted: " + result.affectedRows);
   });
-

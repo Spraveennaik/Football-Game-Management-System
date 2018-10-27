@@ -2,8 +2,8 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
+  user: "username",
+  password: "password",
   database: "mydb"
 });
 
@@ -40,11 +40,11 @@ var sql = "create table skill(Reflexes int(3) NOT NULL, Dribbling int(3) NOT NUL
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table skills created");
-  });  
+  });
 
 
-  
-/* 
+
+/*
   var sql = "CREATE TABLE customers3 (name VARCHAR(255), address VARCHAR(255))";
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -52,4 +52,3 @@ var sql = "create table skill(Reflexes int(3) NOT NULL, Dribbling int(3) NOT NUL
   });
 */
 });
-

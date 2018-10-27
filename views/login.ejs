@@ -51,7 +51,13 @@
 									<% } %>
 									<% if(isAuthenticated) { %>
                                     <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
-                                    <% } %>
+									<% } %>
+									<% if(isAuthenticated) { %>
+										<li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
+										<% } %>
+										<% if(isAuthenticated) { %>
+											<li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
+											<% } %>
 								</ul>
 							</nav>
 						</div>

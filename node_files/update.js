@@ -2,8 +2,8 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
+  user: "username",
+  password: "password",
   database: "mydb"
 });
 
@@ -28,4 +28,3 @@ while(i<100)
  console.log("Table skill updated");
 
 }, 2* 60 * 1000);
-

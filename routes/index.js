@@ -14,11 +14,11 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 
 
-const con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "mydb" 
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "username",
+  password: "password",
+  database: "mydb"
 });
 
 
@@ -36,7 +36,7 @@ router.get('/g', function(req, res, next) {
 
 
 router.get('/register', function(req, res, next) {
-  res.render('register', { 
+  res.render('register', {
   	title: 'Register',
   	errors : '',
   	message : ''
@@ -54,8 +54,8 @@ router.post('/register', function(req, res, next) {
 
 	if(errors){
 		console.log(`errors: ${JSON.stringify(errors)}`);
-		
-		res.render('register', { 
+
+		res.render('register', {
 			title: 'Register Error',
 			errors : errors,
 			message : ''
@@ -65,18 +65,18 @@ router.post('/register', function(req, res, next) {
 		const username = req.body.username;
 		const email = req.body.email;
 		const password = req.body.password;
-		
+
    	if (!(req.files.sampleFile))
     {
     	message = "Image not Uploaded. Please upload an image";
-    	res.render('register', { 
+    	res.render('register', {
 			title: 'Register Error',
 			errors : '',
 			message : message
 			    });
-			
+
     }else{
-  
+
 	var file = req.files.sampleFile;
   	var image_name = file.name;
   	console.log(image_name);
@@ -85,12 +85,12 @@ router.post('/register', function(req, res, next) {
   	if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){
 
 	file.mv('public/images/upload_images/'+file.name, function(err) {
-                             
+
 	     if (err)
  			return res.status(500).send(err);});
 
 		bcrypt.hash(password,saltRounds,function(err,hash){
-		con.query('INSERT INTO manager(username,email,image,password)VALUES(?,?,?,?)', [username, email,image_name, password], 
+		con.query('INSERT INTO manager(username,email,image,password)VALUES(?,?,?,?)', [username, email,image_name, password],
 		function(error,results,fields){
 			if(error) throw error;
 
@@ -102,16 +102,16 @@ router.post('/register', function(req, res, next) {
 
 
 				req.login(user_id,function(err){
-					res.render('index', { 
+					res.render('index', {
 					title: 'Home'
 			     });
-				});					
+				});
 			});
 		});
 	 });
    }else{
    			message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
-    		res.render('register', { 
+    		res.render('register', {
 			title: 'Register Error',
 			errors : '',
 			message : message
@@ -120,8 +120,8 @@ router.post('/register', function(req, res, next) {
   }
 }
 
-});	
- 
+});
+
 
 
 router.get('/profile',authenticationMiddleware(), function(req, res, next) {
@@ -145,9 +145,9 @@ router.get('/profile',authenticationMiddleware(), function(req, res, next) {
 
 
 router.post('/profile', function(req, res, next) {
-  
+
   if(req.user.user_id)
-  	{	
+  	{
 		const firstname = req.body.first_name;
 		const lastname = req.body.last_name;
 		const country = req.body.country;
@@ -163,10 +163,10 @@ router.post('/profile', function(req, res, next) {
   			if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){
 
   			file.mv('public/images/upload_images/'+file.name, function(err) {
-                             
+
 	    	if (err)
 			return res.status(500).send(err);});
-			
+
 			con.query('UPDATE manager SET image = ? WHERE Mid = ?',[image_name,req.user.user_id],function(err,results){
   			if(err)
   			{
@@ -174,7 +174,7 @@ router.post('/profile', function(req, res, next) {
   			}
   			});
 		  }
-		}	
+		}
   		con.query('UPDATE manager SET firstname = ?, lastname = ?, Age = ?, country = ? ,email = ? WHERE Mid = ?',[firstname,lastname,age,country,email,req.user.user_id],function(err,results){
   			if(err)
   			{
@@ -184,7 +184,7 @@ router.post('/profile', function(req, res, next) {
 
   		});
     }
-    
+
 });
 
 router.get('/pwd',authenticationMiddleware(), function(req, res, next) {
@@ -193,19 +193,19 @@ router.get('/pwd',authenticationMiddleware(), function(req, res, next) {
    errors: '',
    message : ''
     });
-}); 
-		
+});
+
 
 router.post('/pwd',authenticationMiddleware(), function(req, res, next) {
 
   	if(req.user.user_id)
-	{	
+	{
 		const oldpwd = req.body.oldpwd;
 		const newpwd = req.body.newpwd;
 		const confirmpwd = req.body.confirmpwd;
 
 		con.query('SELECT * FROM manager WHERE Mid = (?)',[req.user.user_id],function(err,results,fields){
-			
+
 			const hash = results[0].password.toString();
 			console.log(hash);
 			console.log(oldpwd);
@@ -220,8 +220,8 @@ router.post('/pwd',authenticationMiddleware(), function(req, res, next) {
 
 				if(errors){
 				console.log(`errors: ${JSON.stringify(errors)}`);
-		
-				res.render('password', { 
+
+				res.render('password', {
 					title: 'Password Error',
 					errors : errors,
 					message : ''
@@ -247,7 +247,7 @@ router.post('/pwd',authenticationMiddleware(), function(req, res, next) {
 			}
 
 	  	});
-	
+
   	}else{
   		res.render('login', { title: 'Login' });
   	}
@@ -258,7 +258,7 @@ router.post('/pwd',authenticationMiddleware(), function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Login' });
 });
- 
+
  router.get('/extra/12', function(req, res, next) {
   	con.query("select * from team order by TeamID ASC", function(err,result){
 		res.render('extra',{
@@ -295,6 +295,68 @@ router.get('/team/:id',function(req,res,next){
 	});
 });
 
+router.get('/fixtures',function(req,res,next){
+
+	con.query("SELECT * FROM team WHERE TeamID = '"+1+"'",function(err,result){
+		var team1 = result;
+	//	console.log(result);
+
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'defender' and TeamID = '"+1+"' ORDER by Rating DESC limit 4;",function(err,result){
+		var defender1 = result;
+	//	console.log(result);
+
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'striker' and TeamID = '"+1+"' ORDER by Rating DESC limit 3;",function(err,result){
+		var striker1 = result;
+
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'midfielder' and TeamID = '"+1+"' ORDER by Rating DESC limit 3;",function(err,result){
+		var midfielder1 = result;
+
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'goalkeeper' and TeamID = '"+1+"' ORDER by Rating DESC limit 1;",function(err,result){
+		var goalkeeper1 = result;
+
+	con.query("SELECT * FROM team WHERE TeamID = '"+2+"'",function(err,result){
+		var team2 = result;
+	
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'defender' and TeamID = '"+2+"' ORDER by Rating DESC limit 4;",function(err,result){
+		var defender2 = result;
+	
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'striker' and TeamID = '"+2+"' ORDER by Rating DESC limit 3;",function(err,result){
+		var striker2 = result;
+	
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'midfielder' and TeamID = '"+2+"' ORDER by Rating DESC limit 3;",function(err,result){
+		var midfielder2 = result;
+	
+	con.query("select * from (select * from player order by Rating desc)A where A.position = 'goalkeeper' and TeamID = '"+2+"' ORDER by Rating DESC limit 1;",function(err,result){
+		var goalkeeper2 = result;
+
+		res.render('fixtures',{
+			title : "Fixtures",
+			striker1 : striker1,
+			defender1 : defender1,
+			midfielder1 : midfielder1,
+			goalkeeper1 : goalkeeper1,
+			team1 : team1,
+			striker2 : striker2,
+			defender2 : defender2,
+			midfielder2 : midfielder2,
+			goalkeeper2 : goalkeeper2,
+			team2 : team2
+
+		});
+ 		});
+		});
+		});
+		});
+	});
+
+});
+});
+});
+});
+});
+	});
+
+
 router.get('/team/playing/:id',function(req,res,next){
 
 	con.query("SELECT * FROM team WHERE TeamID = '"+req.params.id+"'",function(err,result){
@@ -310,17 +372,18 @@ router.get('/team/playing/:id',function(req,res,next){
 		var midfielder = result;
 
 	con.query("select * from (select * from player order by Rating desc)A where A.position = 'goalkeeper' and TeamID = '"+req.params.id+"' ORDER by Rating DESC limit 1;",function(err,result){
-		var goalkeeper = result;	
+		var goalkeeper = result;
 
 		res.render('playing11',{
-			title : "Playing IX",
+			title : "Playing XI",
 			striker : striker,
 			defender : defender,
 			midfielder : midfielder,
 			goalkeeper : goalkeeper,
 			team : team
+		
 		});
-	  
+
  		});
 		});
 		});
@@ -346,14 +409,14 @@ router.get('/player/:id',function(req,res,next){
 			var results2 = result;
 
 		con.query("SELECT * FROM skill WHERE Player_ID = '"+req.params.id+"'",function(err,result){
-			var results3 = result;		
+			var results3 = result;
 
 		con.query("SELECT * FROM stats WHERE Player_ID = '"+req.params.id+"'",function(err,result){
-			var results1 = result;		
+			var results1 = result;
 
 		con.query("SELECT * FROM team WHERE TeamID = (?)",[results2[0].TeamID],function(err,result){
-			var userx = 0;	
-		
+			var userx = 0;
+
 		res.render('player',{
 			title : "Player",
 			items : results2,
@@ -366,7 +429,7 @@ router.get('/player/:id',function(req,res,next){
 	  });
 	});
    });
-  });  	
+  });
   }else{
 	var userID = req.user.user_id;
 
@@ -374,10 +437,10 @@ router.get('/player/:id',function(req,res,next){
 		var results2 = result;
 
 	con.query("SELECT * FROM skill WHERE Player_ID = '"+req.params.id+"'",function(err,result){
-		var results3 = result;		
+		var results3 = result;
 
 	con.query("SELECT * FROM stats WHERE Player_ID = '"+req.params.id+"'",function(err,result){
-		var results1 = result;		
+		var results1 = result;
 
 	con.query("SELECT * FROM team WHERE TeamID = (?)",[results2[0].TeamID],function(err,result){
 		var userx;
@@ -408,10 +471,10 @@ router.get('/player/:id',function(req,res,next){
 		var results2 = result;
 
 	con.query("SELECT * FROM skill WHERE Player_ID = '"+req.params.id+"'",function(err,result){
-		var results3 = result;		
+		var results3 = result;
 
 	con.query("SELECT * FROM stats WHERE Player_ID = '"+req.params.id+"'",function(err,result){
-		var results1 = result;		
+		var results1 = result;
 
 	con.query("SELECT * FROM team WHERE TeamID = (?)",[results2[0].TeamID],function(err,result){
 
@@ -522,7 +585,7 @@ passport.use(new localStrategy(
 			}
 		}
 
-		}) 
+		})
 	}
 ));
 
@@ -566,9 +629,9 @@ router.get('/goalkeeper', function(req, res, next) {
 
 
 router.get('/createteam',authenticationMiddleware(), function(req, res, next) {
-  res.render('createteam', { 
+  res.render('createteam', {
   	title: 'Create a new team',
-  	errors : '' 
+  	errors : ''
   });
 });
 
@@ -586,26 +649,26 @@ router.post('/createteam', function(req, res, next) {
 
 	if(errors){
 		console.log(`errors: ${JSON.stringify(errors)}`);
-		
-		res.render('createteam', { 
+
+		res.render('createteam', {
 			title: 'Team Error',
 			errors : errors
 			    });
 			}
 	else{
 		const teamname = req.body.createteam;
-		
-		con.query('INSERT INTO team(TName,Mid)VALUES(?,?)', [teamname, req.user.user_id], 
+
+		con.query('INSERT INTO team(TName,Mid)VALUES(?,?)', [teamname, req.user.user_id],
 		function(error,results,fields){
 			if(error) throw error;
-				res.redirect('/profile');				
+				res.redirect('/profile');
 		});
-	 
+
    }
-});	
- 
+});
+
 router.get('/search', function(req, res, next) {
-  res.render('search', { 
+  res.render('search', {
    title: 'search',
    items : '',
    errors : ''
@@ -620,8 +683,8 @@ router.post('/search', function(req, res, next) {
 
 	if(errors){
 		console.log(`errors: ${JSON.stringify(errors)}`);
-		
-		res.render('search', { 
+
+		res.render('search', {
 			title: 'Search error',
 			items :'',
 			errors : errors
@@ -637,15 +700,15 @@ router.post('/search', function(req, res, next) {
 			title : "Players",
 			items : result,
 			errors : ''
-	    	});				
-		}); 
+	    	});
+		});
    }
-});	
+});
 
 router.get('/event',function(req,res,next){
 
 con.query("select * from e_events order by e_id ASC", function(err,result){
-	
+
 			res.render('event',{
 			siteTitle : "surf",
 			pageTitle : "Event list",

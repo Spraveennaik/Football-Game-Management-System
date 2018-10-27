@@ -16,11 +16,11 @@ var bcrypt = require('bcrypt');
 var	fileUpload = require('express-fileupload');
 var fs = require('fs');
 
-const con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "mydb" 
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "username",
+  password: "password",
+  database: "mydb"
 });
 
 var indexRouter = require('./routes/index');
@@ -51,8 +51,8 @@ app.use(fileUpload());
 var options = {
     host: 'localhost',
     port: 3306,
-    user: 'root',
-    password: '',
+    user: 'username',
+    password: 'password',
     database: 'mydb'
 };
 
@@ -107,7 +107,7 @@ passport.use(new localStrategy(
 			}
 		}
 
-		}) 
+		})
 	}
 ));
 

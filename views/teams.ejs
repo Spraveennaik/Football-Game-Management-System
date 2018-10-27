@@ -2,13 +2,13 @@
 <head>
 	<title><%= title %> </title>
 	<meta charset="UTF-8">
-		
+
 	<style>
 		*{border-radius: 0px !important}
 	</style>
-<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 -->
-	
+
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/font-awesome.css" rel="stylesheet">
@@ -27,14 +27,14 @@
 			<div class="header-top-wthree-agileits">
 				<nav class="navbar navbar-default">
 					<div class="navbar-header navbar-left">
-						
+
 						<h1><a class="navbar-brand" href="/"> Football</a></h1>
 					</div>
 									<div class="header_left">
 
 					<% if(!(isAuthenticated)) { %>
 						<ul>
-							<li><a class="shop" href="./login">Login</a></li>				
+							<li><a class="shop" href="./login">Login</a></li>
 						</ul> <%} %>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +46,7 @@
 									<li class="active"><a href="/" data-hover="Home">Home</a></li>
 									<li><a href="/player" data-hover="Player">Player</a></li>
 									<li><a href="/teams" data-hover="Team">Team</a></li>
-									
+
 									<% if(!(isAuthenticated)) { %>
 									<li><a href="/register" data-hover="Register">Register</a></li>
 									<%} %>
@@ -60,7 +60,7 @@
 							</nav>
 						</div>
 					</div>
-					
+
 					<!-- search -->
 					<div class="search">
 						<div class="cd-main-header">
@@ -88,7 +88,7 @@
 
 <div class="=" style="margin-right: 150px;margin-left: 150px">
 	<div class="col s12">
-		<% if(items.length > 0) { %>
+		<% if(undefined!=items && items.length > 0) { %>
 			<table class="table">
 				<thead>
 					<tr>
@@ -104,7 +104,7 @@
 							<td style="width: 30%;text-align:center;"><%= item.TName %> </td>
 							<td style="width: 20%;text-align: center;">
 								<a href="/team/<%= item.TeamID %>" class="btn btn-success" style="background-color: blue">Players</a>
-							</td>	
+							</td>
 						</tr>
 					<% }); %>
 				</tbody>

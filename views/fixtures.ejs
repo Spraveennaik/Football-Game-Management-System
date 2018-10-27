@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+
+<style>
+ .button {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
+
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/font-awesome.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+
+<div class="header" id="home">
+    <div class="banner_header_top_agile_w3ls">
+            <div class="header-top-wthree-agileits">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header navbar-left">
+
+                        <h1><a class="navbar-brand" href="/event"> Football</a></h1>
+                    </div>
+                                    <div class="header_left">
+
+                    <% if((isAuthenticated)) { %>
+                        <ul>
+                            <li><a class="shop" href="./logout">Logout</a></li>
+                        </ul> <%} %>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+                        <div class="top_nav_left">
+                            <nav class="cl-effect-15" id="cl-effect-15">
+                                <ul>
+                                    <li class="active"><a href="/" data-hover="Home">Home</a></li>
+                                    <li><a href="/player" data-hover="Player">Player</a></li>
+                                    <li><a href="/teams" data-hover="Team">Team</a></li>
+
+                                    <% if(!(isAuthenticated)) { %>
+                                    <li><a href="/register" data-hover="Register">Register</a></li>
+                                    <%} %>
+                                    <% if(isAuthenticated) { %>
+                                    <li><a href="/profile" data-hover="Profile">Profile</a></li>
+                                    <% } %>
+                                    <% if(isAuthenticated) { %>
+                                        <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
+                                        <% } %>
+
+																		<% if(isAuthenticated) { %>
+                                    <li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
+                                    <% } %>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- search -->
+                    <div class="search">
+                        <div class="cd-main-header">
+                            <ul class="cd-header-buttons">
+                                <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                            </ul>
+                        </div>
+                        <div id="cd-search" class="cd-search">
+                            <form action="#" method="post">
+                                <input name="Search" type="search" placeholder="Click enter after typing...">
+                            </form>
+                        </div>
+                    </div>
+                    <!-- //search -->
+
+                    <div class="clearfix"></div>
+                </nav>
+            </div>
+        </div>
+</div>
+
+<br>
+<br>
+<div class="container">
+    <h1 style="text-align: center;">Match 1</h1>
+    <table class="table">
+
+  </table>
+</div>
+
+<div>
+	<table class="table">
+		<thead>
+      <tr>
+        <th><center><%= team1[0].TName %></center></th>
+        <th><center><%= team2[0].TName %></center></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th><%= m=Math.floor(((Math.random()*10))%5) %></th>
+        <th><%= n=Math.floor(((Math.random()*10))%5) %></th>
+      </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <% name=" " %>
+            <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
+            <td><%= name %></td>
+            <% name=" " %>
+            <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
+            <td><%= name %></td>
+        </tr>
+    </tbody>
+    <tbody>
+            <tr>
+                <% name=" " %>
+                <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
+                <td><%= name %></td>
+                <% name=" " %>
+                <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
+                <td><%= name %></td>
+            </tr>
+        </tbody>
+        <tbody>
+                <tr>
+                    <% name=" " %>
+                    <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
+                    <td><%= name %></td>
+                    <% name=" " %>
+                    <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
+                    <td><%= name %></td>
+                </tr>
+        </tbody>
+
+        <tbody>
+                <tr>
+                    <% name=" " %>
+                    <% if(--m >= 0){name=striker1[Math.floor(((Math.random()*10))%3)].firstname}  %>
+                    <td><%= name %></td>
+                    <% name=" " %>
+                    <% if(--n >= 0){name=striker2[Math.floor(((Math.random()*10))%3)].firstname}  %>
+                    <td><%= name %></td>
+                </tr>
+        </tbody>
+    
+	</table>
+</div>
+</body>
+
+</html>
