@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-						<h1><a class="navbar-brand" href="/event"> Football</a></h1>
+						<h1><a class="navbar-brand"> Football</a></h1>
 					</div>
 									<div class="header_left">
 
@@ -60,23 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li><a href="/player" data-hover="Player">Player</a></li>
 									<li><a href="/teams" data-hover="Team">Team</a></li>
 									
-<!--
-									<li class="dropdown">
-										<a href="services.html" data-hover="Drop Down" class="dropdown-toggle" data-toggle="dropdown">Drop Down <b class="fa fa-angle-down"></b></a>
-										<ul class="dropdown-menu">
-											<li><a href="404.html">Services</a></li>
-											<li class="divider"></li>
-											<li><a class="s-menu" href="#">Pages <b class="fa fa-angle-right"></b></a>
-												<ul class="dropdown-menu sub-menu">
-													<li><a href="404.html">Error</a></li>
-													<li class="divider"></li>
-													<li><a href="gallery.html">Gallery</a></li>
-												</ul>
-											</li>
-
-										</ul>
-									</li>
--->									<% if(!(isAuthenticated)) { %>
+									<% if(!(isAuthenticated)) { %>
 									<li><a href="/register" data-hover="Register">Register</a></li>
 									<%} %>
 									<% if(isAuthenticated) { %>
@@ -94,12 +78,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="search">
 						<div class="cd-main-header">
 							<ul class="cd-header-buttons">
-								<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+								<li><a class="cd-search-trigger" href="/search"> <span></span></a></li>
 							</ul>
 						</div>
 						<div id="cd-search" class="cd-search">
-							<form action="#" method="post">
-								<input name="Search" type="search" placeholder="Click enter after typing...">
+							<form action="/search" method="POST" encType="multipart/form-data">
+								<input name="search" type="search" placeholder="Click enter after typing...">
 							</form>
 						</div>
 					</div>
@@ -139,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="item item3">
 					<div class="container">
 						<div class="carousel-caption">
-							<h3>Football<span>For Me</span></h3>
+							<h3>Football <span>For Me</span></h3>
 
 						</div>
 					</div>
@@ -392,7 +376,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- Testimonials -->
 	<div class="testimonials">
 		<div class="container">
-			<h3 class="tittle-w3ls">What people says</h3>
+			<h3 class="tittle-w3ls">Top Players</h3>
 			<div class="inner_sec_info_w3ls_agile">
 				<div class="col-md-6 testimonials-main">
 						<div class="carousel slide two" data-ride="carousel" id="quote-carousel">
@@ -409,8 +393,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="inner-testimonials">
 										<img src="images/1.jpg" alt=" " class="img-responsive" />
 										<div class="teastmonial-info">
-											<h5>Andy Wovel</h5>
-											<span>Lorem Ipsum</span>
+											<h5>Cristiano Ronaldo</h5>
+											<span>Forward</span>
 											<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis hendrerit lobortis elementum, Quis nostrum exercitationem
 												ullam corporis suscipit laboriosam. </p>
 										</div>
@@ -421,8 +405,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="inner-testimonials">
 										<img src="images/2.jpg" alt=" " class="img-responsive" />
 										<div class="teastmonial-info">
-											<h5>Bernard Russo</h5>
-											<span>Lorem Ipsum</span>
+											<h5>Lionel Messi</h5>
+											<span>Forward</span>
 											<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis hendrerit lobortis elementum, Quis nostrum exercitationem
 												ullam corporis suscipit laboriosam. </p>
 										</div>
@@ -433,8 +417,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="inner-testimonials">
 										<img src="images/3.jpg" alt=" " class="img-responsive" />
 										<div class="teastmonial-info">
-											<h5>Alex Merphy</h5>
-											<span>Lorem Ipsum</span>
+											<h5>Jan Oblak</h5>
+											<span>Goal Keeper</span>
 											<p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis hendrerit lobortis elementum, Quis nostrum exercitationem
 												ullam corporis suscipit laboriosam. </p>
 										</div>

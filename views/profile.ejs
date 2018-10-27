@@ -33,7 +33,7 @@
                 <nav class="navbar navbar-default">
                     <div class="navbar-header navbar-left">
                         
-                        <h1><a class="navbar-brand" href="/event"> Football</a></h1>
+                        <h1><a class="navbar-brand" href="/"> Football</a></h1>
                     </div>
                                     <div class="header_left">
 
@@ -58,6 +58,9 @@
                                     <% if(isAuthenticated) { %>
                                     <li><a href="/profile" data-hover="Profile">Profile</a></li>
                                     <% } %>
+                                    <% if(isAuthenticated) { %>
+                                    <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
+                                    <% } %>
                                 
                                 </ul>
                             </nav>
@@ -68,12 +71,12 @@
                     <div class="search">
                         <div class="cd-main-header">
                             <ul class="cd-header-buttons">
-                                <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                                <li><a class="cd-search-trigger" href="/search"> <span></span></a></li>
                             </ul>
                         </div>
                         <div id="cd-search" class="cd-search">
-                            <form action="#" method="post">
-                                <input name="Search" type="search" placeholder="Click enter after typing...">
+                            <form action="/search" method="POST">
+                                <input name="earch" type="search" placeholder="Click enter after typing...">
                             </form>
                         </div>
                     </div>
@@ -87,6 +90,7 @@
 
 <br>
 <br>
+
 
 <div class="container bootstrap snippet" >
 
@@ -104,8 +108,7 @@
 
                    <div class="form-group">
                               <input type="file" name="sampleFile" id="image"  title="enter image" value="">
-                              </div>                 
-
+                              </div>       
             </div></hr><br>
         </div><!--/col-3-->
 
@@ -164,7 +167,12 @@
                                 <br>
                                 <div class="row">
                                 <button class="btn btn-lg btn-success" type="submit" style="background-color: #0f2453; "><i class="glyphicon glyphicon-ok-sign"></i>Save</button> 
-                                <a class="shop" href="/team/<%= items[0].Mid %>" style="color: white;margin-left: 70%;letter-spacing: 2px;">Team</a>      
+
+                                <% if(team.length > 0) { %>
+                                    <a class="shop" href="/team/<%= team[0].TeamID %>" style="color: white;margin-left: 70%;letter-spacing: 2px;">Team</a>
+                                 <% }else{ %>     
+                                     <a href="/createteam" class="btn btn-success btn-lg" style="margin-left: 50%">Create a new team</a>
+                                  <% } %>      
                                 </div>                           
                             </div>
                       </div>

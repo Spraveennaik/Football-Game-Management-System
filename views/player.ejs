@@ -1,244 +1,367 @@
 <html>
 <head>
-	<title><%= title %></title>
-	<meta charset="UTF-8">
+	<title><%= title %> </title>
+    <meta charset="UTF-8">
+        
+    <style>
+        *{border-radius: 0px !important}
+    </style>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+-->
 
-		<link rel="stylesheet" href="/pcss/bootstrap.min.css"/>
-		<script src="/pjs/jquery.min.js"></script>
-		<script src="/pjs/tether.min.js"></script>
-		<script src="/pjs/bootstrap.min.js"></script>
+    
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- //for bootstrap working -->
 
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/font-awesome.css" rel="stylesheet">
-	
-	<style>
-		*{border-radius: 0px !important}
+        <link rel="stylesheet1" href="/pcss/bootstrap.min.css"/>
+        <script src="/pjs/jquery.min.js"></script>
+        <script src="/pjs/tether.min.js"></script>
+        <script src="/pjs/bootstrap.min.js"></script>
 
-	</style>
 
-	<style>
-		a.hover{
-			color: red;
-		}
-	</style>
+<style>
+    .body{
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+    .container{
+       width: 100%; 
+        margin: 100px auto;
+    }
 
+
+    .container .box{
+        width: 20%;
+        float: left;
+        margin-top: 30px;
+    }
+
+    .container .box .chart{
+        position: relative;;
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 30px;
+        line-height: 110px;
+    }
+
+    .container .box canvas{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .container1{ 
+        margin: 0px auto;
+        margin-left: 85px;
+    }
+
+
+    .container1 .box{
+        width: 100%;
+        float: left;
+        margin-top: 30px;
+    }
+
+    .container1 .box .chart{
+        position: relative;;
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 30px;
+        line-height: 110px;
+    }
+
+    .container1 .box canvas{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+</style>
+
+<style>
+.card {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  align-content: center;
+  text-align: center;
+  font-family: arial;
+  margin-left: 60px;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
 
 </head>
-
 <body>
-<div class="header" id="home">	
-	<div class="banner_header_top_agile_w3ls">
-			<div class="header-top-wthree-agileits">
-				<nav class="navbar navbar-default">
-  						<div class="navbar-header navbar-left">
-  								<!-- <h1><a class="navbar-brand" href="/"> Football</a></h1> -->
-						<a href="/" class="btn btn-success" style="background-color: red;top: 0;left: 0;position: absolute;width: 220px;height: 59px;text-align: center;font-size: 25px;font-family: sans-serif;padding-top: 10px;border: none;"><b>FOOTBALL</b></a>
-						<nav>
-							<a href="/" style="margin-left: 221px;position: absolute;top: 16px;color:#52220E; text-decoration: none;letter-spacing: 1px;" onMouseOver= "this.style.color='red'" onMouseOut="this.style.color='#52220E'">Home</a>
-						</nav>  
-					</div>
+<div class="header" id="home">
+    <div class="banner_header_top_agile_w3ls">
+            <div class="header-top-wthree-agileits">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header navbar-left">
+                        
+                        <h1><a class="navbar-brand" href="/"> Football</a></h1>
+                    </div>
+                                    <div class="header_left">
 
-  			<h1> <%= teamname %></h1>
+                    <% if(!(isAuthenticated)) { %>
+                        <ul>
+                            <li><a class="shop" href="/login">Login</a></li>               
+                        </ul> <%} %>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 
-
- <!--  <a href="/player" class="btn btn-success" style="background-color: red;width: 150px;margin-left: 0px;height: 56px;text-alignment:center">player</a>-->
- <div class="clearfix"></div>
-
-</nav>
+                        <div class="top_nav_left">
+                            <nav class="cl-effect-15" id="cl-effect-15">
+                                <ul>
+                                    <li class="active"><a href="/" data-hover="Home">Home</a></li>
+                                    <li><a href="/player" data-hover="Player">Player</a></li>
+                                    <li><a href="/teams" data-hover="Team">Team</a></li>
+                                    
+                                    <% if(!(isAuthenticated)) { %>
+                                    <li><a href="/register" data-hover="Register">Register</a></li>
+                                    <%} %>
+                                    <% if(isAuthenticated) { %>
+                                    <li><a href="/profile" data-hover="Profile">Profile</a></li>
+                                    <% } %>
+                                    <% if(isAuthenticated) { %>
+                                    <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
+                                    <% } %>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="search">
+            <div class="cd-main-header">
+              <ul class="cd-header-buttons">
+                <li><a class="cd-search-trigger" href="/search"> <span></span></a></li>
+              </ul>
+            </div>
+            <div id="cd-search" class="cd-search">
+              <form action="/search" method="POST" encType="multipart/form-data">
+                <input name="search" type="search" placeholder="Click enter after typing...">
+              </form>
+            </div>
+          </div>
+                    <div class="clearfix"></div>
+                </nav>
+            </div>
+        </div>
 </div>
-</div>
-</div>
-<br>
-<br>
-
-
-<div class="row">
-
-        <div class="col-sm-3"><!--left col-->
-                <img src="/images/<%= items[0].Player_ID %>.jpg" style="height: 200px;width: 200px;border-radius: 50%;margin-left:60px;position: absolute;" alt="avatar">
-                <br><br><br><br><br><br><br><br><br>
-                <h3 style="margin-left: 60px;"><%= items[0].firstname %> <%= items[0].lastname %></h3>
-
-        </div><!--/col-3-->
-        
-    
-
-    <div style="margin-left: 100px;width: 60%;">
-		<h4 >&emsp;&emsp;&emsp;About</h4><br>
-		<div class="row">
-    		<div style="width: 15%">
-                <label>Player ID</label>
-            </div>
-            <div style="width: 40%">
-               <p> : &nbsp; <%= items[0].Player_ID %></p>
-            </div>
-        </div>
-                                        
-
-        <div class="row">
-           <div style="width: 15%">
-               <label>Age</label>
-            </div>
-            <div style="width: 40%">
-                <p> : &nbsp;<%= items[0].Age %></p>
-            </div>
-         </div>
-
-         <div class="row">
-           <div style="width: 15%">
-               <label>Country</label>
-            </div>
-            <div style="width: 40%">
-                <p> : &nbsp;<%= items[0].Country %></p>
-            </div>
-         </div>
-
-         <div class="row">
-           <div style="width: 15%">
-               <label>Position</label>
-            </div>
-            <div style="width: 40%">
-                <p> :&nbsp; <%= items[0].Position %></p>
-            </div>
-         </div>
-
-         <div class="row">
-           <div style="width: 15%">
-               <label>Rating</label>
-            </div>
-            <div style="width: 40%">
-                <p> : &nbsp;<%= items[0].Rating %></p>
-            </div>
-         </div>
-
-        <div class="row">
-           <div style="width: 15%">
-               <label>Height</label>
-            </div>
-            <div style="width: 40%">
-                <p> : &nbsp;<%= items[0].Height %></p>
-            </div>
-         </div>
-
-         <div class="row">
-           <div style="width: 15%">
-               <label>Price</label>
-            </div>
-            <div style="width: 40%">
-                <p> : &nbsp;<%= items[0].Price %></p>
-            </div>
-         </div>
-    </div>                             
-
- 	
-
-    <div style="width: 35%;position: fixed;right: 0px;">
-		<h4>&emsp;Stats</h4><br>
-		<div class="row">
-    		<div style="width: 20%">
-                <label>Appearances</label>
-            </div>
-            <div style="width: 10%">
-               <p> : &nbsp; <%= stat[0].Appearances %></p>
-            </div>
-        </div>
-                                        
-         <div class="row">
-    		<div style="width: 20%">
-                <label>Goals</label>
-            </div>
-            <div style="width: 10%">
-               <p> : &nbsp; <%= stat[0].Goals %></p>
-            </div>
-        </div>
-
-        <div class="row">
-    		<div style="width: 20%">
-                <label>Key passes</label>
-            </div>
-            <div style="width: 10%">
-               <p> : &nbsp; <%= stat[0].Key_passes %></p>
-            </div>
-        </div>
-
-         <div class="row">
-    		<div style="width: 20%">
-                <label>Assists</label>
-            </div>
-            <div style="width: 10%">
-               <p> : &nbsp; <%= stat[0].Assists %></p>
-            </div>
-        </div>
-
-         <div class="row">
-    		<div style="width: 20%">
-                <label>Saves</label>
-            </div>
-            <div style="width: 10%">
-               <p> : &nbsp; <%= stat[0].saves %></p>
-            </div>
-        </div>
-
-         <div class="row">
-    		<div style="width: 20%">
-                <label>Clearances</label>
-            </div>
-            <div style="width: 10%">
-               <p> : &nbsp; <%= stat[0].Clearances %></p>
-            </div>
-        </div>
-
-        <div class="row">
-    		<div style="width: 20%">
-                <label>Clean sheets</label>
-            </div>
-            <div style="width: 10%">
-               <p> : &nbsp; <%= stat[0].Clean_sheets %></p>
-            </div>
-        </div>
-    </div>                                   
-                 
-  </div>
 
 <br>
-<br>
-
-	
 <!--
+ <% if(isAuthenticated) { %>
+ <div>
 
-<div class="=" style="margin-right: 100px;margin-left: 100px">
-	<div class="col s12">
-		<% if(items.length > 0) { %>
-			<table class="table">
-				<thead>
-					<tr>
-						<th style="width:10%;text-align:center;">Player ID</th>
-						<th style="width:30%;text-align:center;">Name</th>
-						<th style="width: 15%;text-align: center;">Position</th>
-						<th style="width: 15%;text-align: center;">Rating</th>
-						<th style="width: 15%;text-align: center;">Country</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% items.forEach(function(item,index){ %>
-						<tr>
-							<td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
-							<td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
-							<td style="width: 15%;text-align: center;"><%= item.Position %></td>
-							<td style="width: 15%;text-align: center;"><%= item.Rating %></td>
-							<td style="width: 15%;text-align: center;"><%= item.Country %></td>
-								
-						</tr>
-					<% }); %>
-				</tbody>
-			</table>
-		<% }else{ %>
-			<p><strong>There are no records available</strong></p>
-		<% } %>
-	</div>
+ <a href="/buyplayer" class="btn btn-success btn-lg" style="margin-left: 78%">Buy Player</a>
+<a href="/sellplayer" class="btn btn-danger btn-lg" style="margin-left: 15px;">Sell Player</a>
 </div>
+<% } %>
 -->
+<% if(isAuthenticated) { %>
+<% if(user) { %>
+  <a href="/sellplayer/<%= items[0].Player_ID %>" class="btn btn-danger btn-lg" style="margin-left: 85%;">Sell Player</a>
+    <% }else{ %>
+    <% if(team.length > 0){ %>
+   <a href="/buyplayer/<%= items[0].Player_ID %>" class="btn btn-success btn-lg" style="margin-left: 85%">Buy Player</a>
+    <% } %>
+<% } %>
+<% } %>
+
+ <% if(!(team.length > 0)){ %>
+ <div style="text-align: center;">
+  <h2><%= teamname[0].TName %></h2>
+</div>
+    <% } %>
+
+
+<br><br>
+<div class="row">
+    <div class="container1 col-lg-3" style="float: left;" >
+        <div class="box">
+            <div class="chart" data-percent="100"><%= stat[0].Goals %></div>
+            <h3 style="text-align: center">Goals</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="100"><%= stat[0].Key_passes %></div>
+            <h3 style="text-align: center">Key Passes</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="100"><%= stat[0].Assists %></div>
+            <h3 style="text-align: center">Assists</h3>
+        </div>
+    </div>  
+
+
+<div class="card col-lg-3" style="float: left;">
+  <img src="/images/ball.jpg" alt="avatar" style="width:100%;height: 300px;">
+  <h1><%= items[0].firstname %> <%= items[0].lastname %></h1>
+  <p class="title"><%= items[0].Position %></p>
+ <table style="width: 100%;margin-left: 30px;margin-top: 10px;margin-bottom: 10px;">
+  <tr>
+    <td>Player ID</td>
+    <td><%= items[0].Player_ID %></td>   
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td><%= items[0].Age %></td>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td><%= items[0].Country %></td>
+  </tr>
+  <tr>
+    <td>Rating</td>
+    <td><%= items[0].Rating %></td>
+  </tr>
+  <tr>
+    <td>Hegiht</td>
+    <td><%= items[0].Height %></td>
+  </tr>
+</table>
+  
+ <p><button> $<%= items[0].Price %>00</button></p>
+ </div>
+
+<div class="container1 col-lg-3" style="float: left;" >
+        <div class="box">
+            <div class="chart" data-percent="100"><%= stat[0].Clearances %></div>
+            <h3 style="text-align: center">Clearances</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="100"><%= stat[0].saves %></div>
+            <h3 style="text-align: center">Saves</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="100"><%= stat[0].Clean_sheets %></div>
+            <h3 style="text-align: center">Clean sheets</h3>
+        </div>
+    </div>  
+
+</div>
+
+<div>
+
+    <script src="../js/piechart.js"></script>
+    <script src="../js/easypiechart.js"></script>
+    <script>
+    $(function(){
+    $('.chart').easyPieChart({
+    });
+    });
+    </script>
+
+
+    <div class="container">
+        <h1 style="text-align: center;background-color:red ;color: white">STATS</h1>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Reflexes %>"><%= skill[0].Reflexes %></div>
+            <h3 style="text-align: center">Reflexes</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Dribbling %>"><%= skill[0].Dribbling %></div>
+            <h3 style="text-align: center">Dribbling</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Crossing %>"><%= skill[0].Crossing %></div>
+            <h3 style="text-align: center;">Crossing</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Ball_control %>"><%= skill[0].Ball_control %></div>
+            <h3 style="text-align: center;">Ball control</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Stamina %>"><%= skill[0].Stamina %></div>
+            <h3 style="text-align: center;">Stamina</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Work_rate %>"><%= skill[0].Work_rate %></div>
+            <h3 style="text-align: center;">Work_rate</h3>
+        </div>  
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Short_passing %>"><%= skill[0].Short_passing %></div>
+            <h3 style="text-align: center;">Short_passing</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Long_shot %>"><%= skill[0].Long_shot %></div>
+            <h3 style="text-align: center;">Long_shot</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Balance %>"><%= skill[0].Balance %></div>
+            <h3 style="text-align: center;">Balance</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Diving %>"><%= skill[0].Diving %></div>
+            <h3 style="text-align: center;">Diving</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Vision %>"><%= skill[0].Vision %></div>
+            <h3 style="text-align: center;">Vision</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Aggression %>"><%= skill[0].Aggression %></div>
+            <h3 style="text-align: center;">Aggression</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Interception %>"><%= skill[0].Interception %></div>
+            <h3 style="text-align: center;">Interception</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Long_throw %>"><%= skill[0].Long_throw %></div>
+            <h3 style="text-align: center;">Long_throw</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Marking %>"><%= skill[0].Marking %></div>
+            <h3 style="text-align: center;">Marking</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].Finishing %>"><%= skill[0].Finishing %></div>
+            <h3 style="text-align: center;">Finishing</h3>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="<%= skill[0].standing_tackle %>"><%= skill[0].standing_tackle %></div>
+            <h3 style="text-align: center;">standing_tackle</h3>
+        </div>
+    </div>
+
+</div>
+
+
 </body>
 </html>
+
 

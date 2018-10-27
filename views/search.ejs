@@ -1,0 +1,143 @@
+<html>
+<head>
+    <title><%= title %> </title>
+    <meta charset="UTF-8">
+        
+    <style>
+        *{border-radius: 0px !important}
+    </style>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+-->
+    
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/searchmain.css" rel="stylesheet" />
+    <!-- //for bootstrap working -->
+
+        <link rel="stylesheet1" href="/pcss/bootstrap.min.css"/>
+        <script src="/pjs/jquery.min.js"></script>
+        <script src="/pjs/tether.min.js"></script>
+        <script src="/pjs/bootstrap.min.js"></script>
+
+</head>
+</head>
+
+<body>
+
+<div class="header" id="home">
+    <div class="banner_header_top_agile_w3ls">
+            <div class="header-top-wthree-agileits">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header navbar-left">
+                        
+                        <h1><a class="navbar-brand" href="/"> Football</a></h1>
+                    </div>
+                                    <div class="header_left">
+
+                    <% if(!(isAuthenticated)) { %>
+                        <ul>
+                            <li><a class="shop" href="./login">Login</a></li>               
+                        </ul> <%} %>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+                        <div class="top_nav_left">
+                            <nav class="cl-effect-15" id="cl-effect-15">
+                                <ul>
+                                    <li class="active"><a href="/" data-hover="Home">Home</a></li>
+                                    <li><a href="/player" data-hover="Player">Player</a></li>
+                                    <li><a href="/teams" data-hover="Team">Team</a></li>
+                                    
+                                    <% if(!(isAuthenticated)) { %>
+                                    <li><a href="/register" data-hover="Register">Register</a></li>
+                                    <%} %>
+                                    <% if(isAuthenticated) { %>
+                                    <li><a href="/profile" data-hover="Profile">Profile</a></li>
+                                    <% } %>
+                                    <% if(isAuthenticated) { %>
+                                    <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
+                                    <% } %>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                  
+
+                    <div class="clearfix"></div>
+                </nav>
+            </div>
+        </div>
+</div>
+
+
+<div class="container" style="width:50%;text-align: center;">
+
+<% if(errors) {%>
+<% errors.forEach(function(errors){ %>
+    <div class="alert alert-danger">
+         <p><%= errors.msg %></p>
+    </div>
+<% }); %>
+<% } %>
+</div>
+
+
+<div>
+  <div class="s01"> 
+      <form action="/search" method="POST" encType="multipart/form-data">
+        <fieldset>
+          <legend>Search Player by Name</legend>
+        </fieldset>
+        <div class="inner-form">
+          <div class="input-field -wrap">
+            <input id="search" type="text" name="search" placeholder="Enter Firstname or Lastname" />
+          </div>
+          <div class="input-field third-wrap">
+            <button class="btn-search" type="submit">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+
+<div class="=" style="margin-right: 100px;margin-left: 100px">
+    <div class="col s12">
+        <% if(items.length > 0) { %>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width:10%;text-align:center;">Player ID</th>
+                        <th style="width:30%;text-align:center;">Name</th>
+                        <th style="width: 15%;text-align: center;">Position</th>
+                        <th style="width: 15%;text-align: center;">Rating</th>
+                        <th style="width: 15%;text-align: center;">Country</th>
+                        <th style="width: 25%;text-align: center;">     </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% items.forEach(function(item,index){ %>
+                        <tr>
+                            <td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
+                            <td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
+                            <td style="width: 15%;text-align: center;"><%= item.Position %></td>
+                            <td style="width: 15%;text-align: center;"><%= item.Rating %></td>
+                            <td style="width: 15%;text-align: center;"><%= item.Country %></td>
+                            <td style="width: 25%;text-align: center;">
+                                <a href="/player/<%= item.Player_ID %>" class="btn btn-success" style="background-color: blue">Profile</a>
+                            </td>   
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% }else{ %>
+            <p><strong>There are no records available</strong></p>
+        <% } %>
+    </div>
+</div>
+
+
+</body>
+</html>

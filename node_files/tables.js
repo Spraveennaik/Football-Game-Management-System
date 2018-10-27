@@ -24,7 +24,7 @@ con.connect(function(err) {
   });
 
 
-  var sql = "create table Player(Player_ID int(5) PRIMARY KEY AUTO_INCREMENT, firstname varchar(15) NOT NULL,lastname varchar(15), Age int(3) NOT NULL, Country varchar(15) NOT NULL, Rating int(3) NOT NULL, Position varchar(10) NOT NULL,Height DECIMAL(5,2) NOT NULL,Price int(8) NOT NULL, TeamID int(6) ,FOREIGN KEY(TeamID) REFERENCES Team(TeamID) ON DELETE SET NULL,Available BINARY(1) NOT NULL);";
+  var sql = "create table Player(Player_ID int(5) PRIMARY KEY AUTO_INCREMENT, firstname varchar(15) NOT NULL,lastname varchar(15), Age int(3) NOT NULL, Country varchar(15) NOT NULL, Rating int(3) NOT NULL, Position varchar(10) NOT NULL,Height int(3) NOT NULL,Price int(8) NOT NULL, TeamID int(6) ,FOREIGN KEY(TeamID) REFERENCES Team(TeamID) ON DELETE SET NULL);";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table Player created");

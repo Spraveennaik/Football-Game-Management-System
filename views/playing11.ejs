@@ -9,16 +9,15 @@
 <!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
 -->
 	
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/font-awesome.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/css/font-awesome.css" rel="stylesheet">
 	<!-- //for bootstrap working -->
 
 		<link rel="stylesheet1" href="/pcss/bootstrap.min.css"/>
 		<script src="/pjs/jquery.min.js"></script>
 		<script src="/pjs/tether.min.js"></script>
 		<script src="/pjs/bootstrap.min.js"></script>
-
 
 </head>
 
@@ -84,11 +83,15 @@
 </div>
 
 <br>
-<br>
 
+
+
+<h1 style="text-align: center;"><%= team[0].TName %></h1>
+
+<br><br>
 <div class="=" style="margin-right: 100px;margin-left: 100px">
 	<div class="col s12">
-		<% if(items.length > 0) { %>
+		<% if(striker.length > 0 || defender.length > 0) { %>
 			<table class="table">
 				<thead>
 					<tr>
@@ -101,7 +104,49 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% items.forEach(function(item,index){ %>
+					<% defender.forEach(function(item,index){ %>
+						<tr>
+							<td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
+							<td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
+							<td style="width: 15%;text-align: center;"><%= item.Position %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Rating %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Country %></td>
+							<td style="width: 25%;text-align: center;">
+								<a href="/player/<%= item.Player_ID %>" class="btn btn-success" style="background-color: blue">Profile</a>
+							</td>	
+						</tr>
+					<% }); %>
+				</tbody>
+				<tbody>
+					<% striker.forEach(function(item,index){ %>
+						<tr>
+							<td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
+							<td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
+							<td style="width: 15%;text-align: center;"><%= item.Position %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Rating %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Country %></td>
+							<td style="width: 25%;text-align: center;">
+								<a href="/player/<%= item.Player_ID %>" class="btn btn-success" style="background-color: blue">Profile</a>
+							</td>	
+						</tr>
+					<% }); %>
+				</tbody>
+				<tbody>
+					<% midfielder.forEach(function(item,index){ %>
+						<tr>
+							<td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
+							<td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
+							<td style="width: 15%;text-align: center;"><%= item.Position %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Rating %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Country %></td>
+							<td style="width: 25%;text-align: center;">
+								<a href="/player/<%= item.Player_ID %>" class="btn btn-success" style="background-color: blue">Profile</a>
+							</td>	
+						</tr>
+					<% }); %>
+				</tbody>
+				<tbody>
+					<% goalkeeper.forEach(function(item,index){ %>
 						<tr>
 							<td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
 							<td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
@@ -116,11 +161,16 @@
 				</tbody>
 			</table>
 		<% }else{ %>
-			<p><strong>There are no records available</strong></p>
+			<br><br>
+			<p><strong>No Players in your team. Start building your team.</strong></p> <br><br>
+			<a href="/player" class="btn btn-success btn-lg">Add Players</a>
+			<br>
 		<% } %>
 	</div>
 </div>
 
 
+
 </body>
 </html>
+
