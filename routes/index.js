@@ -132,7 +132,7 @@ router.get('/profile',authenticationMiddleware(), function(req, res, next) {
 
 		con.query('SELECT * FROM manager WHERE Mid = (?)',[req.user.user_id],function(err,results,fields){
 			res.render('profile',{
-				title : "profile",
+				title : "Profile",
 				items : results,
 				team : results1
 			});
@@ -295,8 +295,15 @@ router.get('/team/:id',function(req,res,next){
 	});
 });
 
-router.get('/fixtures',function(req,res,next){
+// router.get('/callFixtures',function(req,res,next){
+// 	while(1){
+// 		console.log("gg");
+// 		setInterval(fixtures,1000);
+// 	}
+// });
 
+router.get('/fixtures',function(req,res,next){
+ 
 	con.query("SELECT * FROM team WHERE TeamID = '"+1+"'",function(err,result){
 		var team1 = result;
 
@@ -418,6 +425,8 @@ router.get('/fixtures',function(req,res,next){
 });
 });
 	});
+
+
 
 
 router.get('/team/playing/:id',function(req,res,next){
