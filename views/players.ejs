@@ -35,7 +35,7 @@
 
 					<% if(!(isAuthenticated)) { %>
 						<ul>
-							<li><a class="shop" href="./login">Login</a></li>
+							<li><a class="shop" href="/login">Login</a></li>
 						</ul> <%} %>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,9 +57,7 @@
 									<% if(isAuthenticated) { %>
                                     <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
 									<% } %>
-									<% if(isAuthenticated) { %>
-										<li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
-										<% } %>
+									<li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
 								</ul>
 							</nav>
 						</div>
@@ -85,10 +83,14 @@
 			</div>
 		</div>
 </div>
+<br>
+
+ <% if(isAuthenticated) { %>
+    <a href="/available" class="btn btn-success btn-lg" style="margin-left: 82%">Available Players</a>
+<% } %>
 
 <br>
 <br>
-
 <div class="=" style="margin-right: 100px;margin-left: 100px">
 	<div class="col s12">
 		<% if(undefined!=items && items.length > 0) { %>

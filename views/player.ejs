@@ -160,9 +160,7 @@ button:hover, a:hover {
                                     <% if(isAuthenticated) { %>
                                     <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
                                     <% } %>
-                                    <% if(isAuthenticated) { %>
-										<li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
-										<% } %>
+                                    <li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -253,7 +251,7 @@ button:hover, a:hover {
   </tr>
   <tr>
     <td>Hegiht</td>
-    <td><%= items[0].Height %></td>
+    <td><%= items[0].Height %> cm</td>
   </tr>
 </table>
   

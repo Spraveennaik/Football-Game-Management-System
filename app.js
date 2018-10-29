@@ -18,8 +18,8 @@ var fs = require('fs');
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "username",
-  password: "password",
+  user: "root",
+  password: "",
   database: "mydb"
 });
 
@@ -51,8 +51,8 @@ app.use(fileUpload());
 var options = {
     host: 'localhost',
     port: 3306,
-    user: 'username',
-    password: 'password',
+    user: 'root',
+    password: '',
     database: 'mydb'
 };
 

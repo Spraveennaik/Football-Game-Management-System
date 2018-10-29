@@ -16,8 +16,8 @@ var bodyParser = require('body-parser');
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "username",
-  password: "password",
+  user: "root",
+  password: "",
   database: "mydb"
 });
 
@@ -307,14 +307,14 @@ router.get('/fixtures',function(req,res,next){
 	con.query("SELECT * FROM team WHERE TeamID = '"+1+"'",function(err,result){
 		var team1 = result;
 
-	con.query("select * from (select * from player order by Rating desc)A where A.position = 'defender' and TeamID = '"+1+"' ORDER by Rating DESC limit 4;",function(err,result){
+	con.query("select * from (select * from player order by Rating desc)A where A.Position = 'defender' and TeamID = '"+1+"' ORDER by Rating DESC limit 4;",function(err,result){
 		var defender1 = result;
 		for(i=0;i<4;++i) {
 			con.query("update stats set Appearances = Appearances + 1 where Player_ID = ? ;",defender1[i].Player_ID);
 			}
 
 
-	con.query("select * from (select * from player order by Rating desc)A where A.position = 'striker' and TeamID = '"+1+"' ORDER by Rating DESC limit 3;",function(err,result){
+	con.query("select * from (select * from player order by Rating desc)A where A.Position = 'striker' and TeamID = '"+1+"' ORDER by Rating DESC limit 3;",function(err,result){
 		var striker1 = result;
 		for(i=0;i<striker1.length;++i) {
 			con.query("update stats set Appearances = Appearances + 1 where Player_ID = ? ;",striker1[i].Player_ID);
@@ -329,7 +329,7 @@ router.get('/fixtures',function(req,res,next){
 			assists1[i]=Math.floor(((Math.random()*10))%3);
 		}
 
-	con.query("select * from (select * from player order by Rating desc)A where A.position = 'midfielder' and TeamID = '"+1+"' ORDER by Rating DESC limit 3;",function(err,result){
+	con.query("select * from (select * from player order by Rating desc)A where A.Position = 'midfielder' and TeamID = '"+1+"' ORDER by Rating DESC limit 3;",function(err,result){
 		var midfielder1 = result;
 		console.log(midfielder1);
 		for(i=0;i<goal1;++i) {
@@ -339,7 +339,7 @@ router.get('/fixtures',function(req,res,next){
 		con.query("update stats set Appearances = Appearances + 1 where Player_ID = ? ;",midfielder1[i].Player_ID);
 		}
 
-	con.query("select * from (select * from player order by Rating desc)A where A.position = 'goalkeeper' and TeamID = '"+1+"' ORDER by Rating DESC limit 1;",function(err,result){
+	con.query("select * from (select * from player order by Rating desc)A where A.Position = 'goalkeeper' and TeamID = '"+1+"' ORDER by Rating DESC limit 1;",function(err,result){
 		var goalkeeper1 = result;
 		for(i=0;i<1;++i) {
 			con.query("update stats set Appearances = Appearances + 1 where Player_ID = ? ;",goalkeeper1[i].Player_ID);
@@ -577,6 +577,16 @@ router.get('/player', function(req, res, next) {
 	});
   });
 });
+
+router.get('/available', function(req, res, next) {
+  con.query("SELECT * FROM `player` WHERE TeamID IS NULL ORDER BY Rating DESC ", function(err,result){
+		res.render('players',{
+		title : "Players",
+		items : result
+	});
+  });
+});
+
 
 
 router.get('/buyplayer/:id',authenticationMiddleware(), function(req, res, next) {

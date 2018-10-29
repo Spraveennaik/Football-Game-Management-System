@@ -34,7 +34,7 @@
 
 					<% if(!(isAuthenticated)) { %>
 						<ul>
-							<li><a class="shop" href="./login">Login</a></li>
+							<li><a class="shop" href="/login">Login</a></li>
 						</ul> <%} %>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,9 +56,7 @@
 									<% if(isAuthenticated) { %>
                                     <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
 									<% } %>
-									<% if(isAuthenticated) { %>
-										<li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
-										<% } %>
+									<li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
 								</ul>
 							</nav>
 						</div>

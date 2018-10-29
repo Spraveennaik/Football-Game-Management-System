@@ -33,7 +33,7 @@
                 <nav class="navbar navbar-default">
                     <div class="navbar-header navbar-left">
 
-                        <h1><a class="navbar-brand" href="/event"> Football</a></h1>
+                        <h1><a class="navbar-brand" href="/"> Football</a></h1>
                     </div>
                                     <div class="header_left">
 
@@ -61,30 +61,11 @@
                                     <% if(isAuthenticated) { %>
                                         <li><a href="/transfer" data-hover="Transfers">Transfers</a></li>
                                         <% } %>
-
-																		<% if(isAuthenticated) { %>
-                                    <li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
-                                    <% } %>
-
                                 </ul>
                             </nav>
                         </div>
                     </div>
 
-                    <!-- search -->
-                    <div class="search">
-                        <div class="cd-main-header">
-                            <ul class="cd-header-buttons">
-                                <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
-                            </ul>
-                        </div>
-                        <div id="cd-search" class="cd-search">
-                            <form action="#" method="post">
-                                <input name="Search" type="search" placeholder="Click enter after typing...">
-                            </form>
-                        </div>
-                    </div>
-                    <!-- //search -->
 
                     <div class="clearfix"></div>
                 </nav>
@@ -97,9 +78,10 @@
 <div class="container">
     <h1 style="text-align: center;">Simulate Matches</h1>
 </div>
-
+<br>
+<br>
 <div>
-	<table class="table">
+	<table class="table" style="width: 75%;text-align: center;margin-left: 10%;">
 		<thead>
       <tr>
         <th><center><%= team1[0].TName %></center></th>
@@ -108,8 +90,8 @@
     </thead>
     <tbody>
       <tr>
-        <th><%= m=goal1 %></th>
-        <th><%= n=goal2 %></th>
+        <th style="text-align: center;font-size: 40px;"><%= m=goal1 %></th>
+        <th style="text-align: center;font-size: 40px;"><%= n=goal2 %></th>
       </tr>
     </tbody>
     <tbody>
