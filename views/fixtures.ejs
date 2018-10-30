@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title><%= title %></title>
+    <link rel="shortcut icon" type="image/png" href="images/foot.png">
 
 <style>
  .button {
@@ -104,12 +105,12 @@
     <% for(i=0;i < max;++i){ %>
         <tr>
             <% if(i< goal1) { %>
-            <td><%= striker1[goalscorers1[i]].firstname %> <%= striker1[goalscorers1[i]].lastname %></td>
+            <td><%= striker1[goalscorers1[i]].firstname %> <%= striker1[goalscorers1[i]].lastname %> - <%= Math.floor(Math.random() * (90 - 5)) + 5 %>' </td>
             <% } else { %>
             <td>&nbsp;</td>
             <% } %>
             <% if(i< goal2) { %>
-            <td><%= striker2[goalscorers2[i]].firstname %> <%= striker2[goalscorers2[i]].lastname %></td>
+            <td><%= striker2[goalscorers2[i]].firstname %> <%= striker2[goalscorers2[i]].lastname %> - <%= Math.floor(Math.random() * (90 - 5)) + 5 %>'</td>
             <% } else { %>
                 <td>&nbsp;</td>
                 <% } %>

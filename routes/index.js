@@ -45,6 +45,7 @@ router.get('/register', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
 
+	var check;
 	req.checkBody('username','Username field cannot be empty').notEmpty();
 	req.checkBody('email','email you entered in invalid').isEmail();
 	req.checkBody('password','password must be 4-100 characters long').len(4,100)
@@ -66,32 +67,40 @@ router.post('/register', function(req, res, next) {
 		const email = req.body.email;
 		const password = req.body.password;
 
-   	if (!(req.files.sampleFile))
-    {
-    	message = "Image not Uploaded. Please upload an image";
-    	res.render('register', {
+		con.query('SELECT * FROM manager WHERE username = ?',[username],function(err,results,fields){
+			check = results;
+
+		if(check.length > 0){
+			message = "Username is already taken";
+    		res.render('register', {
 			title: 'Register Error',
 			errors : '',
 			message : message
 			    });
 
-    }else{
+		}else{
 
-	var file = req.files.sampleFile;
-  	var image_name = file.name;
-  	console.log(image_name);
+   		if (!(req.files.sampleFile))
+    	{
+    		
+
+    	}else{
+
+			var file = req.files.sampleFile;
+  			var image_name = file.name;
+  			console.log(image_name);
   // Use the mv() method to place the file somewhere on your server
 
-  	if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){
+  			if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){
 
-	file.mv('public/images/upload_images/'+file.name, function(err) {
+			file.mv('public/images/upload_images/'+file.name, function(err) {
 
-	     if (err)
- 			return res.status(500).send(err);});
+	     	if (err)
+ 				return res.status(500).send(err);});
 
-		bcrypt.hash(password,saltRounds,function(err,hash){
-		con.query('INSERT INTO manager(username,email,image,password)VALUES(?,?,?,?)', [username, email,image_name, password],
-		function(error,results,fields){
+			bcrypt.hash(password,saltRounds,function(err,hash){
+			con.query('INSERT INTO manager(username,email,image,password)VALUES(?,?,?,?)', [username, email,image_name, password],
+			function(error,results,fields){
 			if(error) throw error;
 
 			con.query('SELECT LAST_INSERT_ID() as user_id',function(error,results,fields){
@@ -101,25 +110,25 @@ router.post('/register', function(req, res, next) {
 				console.log(results[0]);
 
 
-				req.login(user_id,function(err){
+					req.login(user_id,function(err){
 					res.render('index', {
 					title: 'Home'
-			     });
+			    	 });
+					});
 				});
-			});
-		});
-	 });
-   }else{
-   			message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
-    		res.render('register', {
-			title: 'Register Error',
-			errors : '',
-			message : message
-		 });
-   }
-  }
-}
-
+				});
+	 			});
+   			}else{
+   				message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
+    			res.render('register', {
+				title: 'Register Error',
+				errors : '',
+				message : message
+		 	});
+   				}
+  			}
+		}});
+	}
 });
 
 
@@ -331,7 +340,7 @@ router.get('/fixtures',function(req,res,next){
 
 	con.query("select * from (select * from player order by Rating desc)A where A.Position = 'midfielder' and TeamID = '"+1+"' ORDER by Rating DESC limit 3;",function(err,result){
 		var midfielder1 = result;
-		console.log(midfielder1);
+	//	console.log(midfielder1);
 		for(i=0;i<goal1;++i) {
 			con.query("update stats set Assists = Assists + 1 where Player_ID = ? ;",midfielder1[assists1[i]].Player_ID);
 		}
@@ -345,14 +354,9 @@ router.get('/fixtures',function(req,res,next){
 			con.query("update stats set Appearances = Appearances + 1 where Player_ID = ? ;",goalkeeper1[i].Player_ID);
 			}
 
-
-
-
-
 	con.query("SELECT * FROM team WHERE TeamID = '"+2+"'",function(err,result){
 		var team2 = result;
-
-		
+	
 
 	con.query("select * from (select * from player order by Rating desc)A where A.position = 'defender' and TeamID = '"+2+"' ORDER by Rating DESC limit 4;",function(err,result){
 		var defender2 = result;
@@ -378,7 +382,7 @@ router.get('/fixtures',function(req,res,next){
 	
 	con.query("select * from (select * from player order by Rating desc)A where A.position = 'midfielder' and TeamID = '"+2+"' ORDER by Rating DESC limit 3;",function(err,result){
 		var midfielder2 = result;
-		console.log(midfielder1);
+		//console.log(midfielder1);
 		for(i=0;i<3;++i) {
 		con.query("update stats set Appearances = Appearances + 1 where Player_ID = ? ;",midfielder2[i].Player_ID);
 		}
